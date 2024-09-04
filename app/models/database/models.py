@@ -16,7 +16,8 @@ class User(Base):
     password = Column(String, nullable=False)
     account_status = Column(Boolean, nullable=False)
     
-    tasks = relationship("Tasks", back_populates="user", order_by=desc("tasks.created_at"))
+    # tasks = relationship("Tasks", back_populates="user", order_by=desc("tasks.created_at"))
+    tasks = relationship("Tasks", back_populates="user")
     
     def as_dict(self):
 
@@ -42,7 +43,9 @@ class Tasks(Base):
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     status = Column(String, unique=False)
-    created_at = Column(DateTime, nullable=False)
+    
+    # created_at = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=func.now())
     due_date = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=True)
     
@@ -76,7 +79,7 @@ class Category(Base):
     __tablename__ = 'categories'
     
     id = Column(Integer, primary_key=True)
-    category = Column(String(10), unique=True)
+    category = Column(String(50), unique=True)
     
     tasks = relationship("Tasks", back_populates="category")
     
