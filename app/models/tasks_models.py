@@ -68,6 +68,7 @@ class TasksModels(UserModels):
             check.description = metadata.description
             check.status = metadata.status
             check.updated_at = get_current_time()
+            check.category_id = metadata.category_id
             db.add(check)
             db.commit()
             return {"message": "Task updated successfully"}
