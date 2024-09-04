@@ -7,7 +7,7 @@ services:
     ports:
       - 8001:8000
     volumes:
-      - ./var/lib/jenkins/workspace/multipurpose_system/app:/var/
+      - ./app:/app
     depends_on:
       - postgresql
     env_file:
