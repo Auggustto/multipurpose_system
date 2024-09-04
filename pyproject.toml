@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "user-management"
+version = "0.1.0"
+description = ""
+authors = ["Auggustto <leonardoaugusto1000a@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = "^2.8.2"
+sqlalchemy = "^2.0.31"
+fastapi = "^0.111.1"
+psycopg2 = "^2.9.9"
+email-validator = "^2.2.0"
+password-validator = "^1.0"
+alembic = "^1.13.2"
+python-decouple = "^3.8"
+passlib = "^1.7.4"
+pytz = "^2024.1"
+pyjwt = "2.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

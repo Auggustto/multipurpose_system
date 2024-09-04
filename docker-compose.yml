@@ -1,0 +1,24 @@
+version: "3.1"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    depends_on:
+      - postgresql
+    env_file:
+      - ./.env
+  
+  postgresql:
+    image: postgres
+    ports: 
+      - 5432:5432
+    env_file:
+      - ./.env
+    volumes:
+      - /home/work/Documentos/Projetos/database/User-Management
