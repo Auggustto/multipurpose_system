@@ -5,10 +5,9 @@ services:
     build:
       context: .
     ports:
-      - 8000:8000
+      - 8001:8000
     volumes:
       - ./app:/app
-    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
     depends_on:
       - postgresql
     env_file:
@@ -21,4 +20,4 @@ services:
     env_file:
       - ./.env
     volumes:
-      - /home/work/Documentos/Projetos/database/User-Management
+      - ./app
