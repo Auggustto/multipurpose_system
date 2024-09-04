@@ -9,15 +9,17 @@ from app.routers.tasks_router import tasks_routers
 from app.routers.category_router import category_routers
 
 
-app = FastAPI()
+app = FastAPI(
+    title="API multipurpose system",
+    description="This is a versatile and multifunctional API designed to meet various management needs. With it, you can register and manage everything from task lists to financial control, providing a unique and efficient solution to organize your activities and finances in one place.",
+    version="1.0.0"
+    )
 
-# Lista de origens permitidas
 origins = [
     "http://localhost:3000",
     "http://localhost:8000",
 ]
 
-# Configuração do CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
