@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, String, Column, DateTime, Boolean, LargeBinary, ForeignKey, func
+from sqlalchemy import Integer, String, Column, DateTime, Boolean, LargeBinary, ForeignKey, func, Float
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.models.database.base import Base
@@ -15,9 +15,13 @@ class User(Base):
     email = Column(String(30), unique=True, nullable=False)
     password = Column(String, nullable=False)
     account_status = Column(Boolean, nullable=False)
+    created_at = Column(DateTime, nullable=True, default=func.now())
+    updated_at = Column(DateTime, nullable=True)
     
     # tasks = relationship("Tasks", back_populates="user", order_by=desc("tasks.created_at"))
     tasks = relationship("Tasks", back_populates="user")
+    accounts = relationship("Accounts", back_populates="user")
+    
     
     def as_dict(self):
 
@@ -73,6 +77,18 @@ class Tasks(Base):
             return value.strftime("%d/%m/%Y %H:%M:%S")
         return None
 
+class Accounts(Base):
+    __tablename__ = 'accounts'
+    
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    name = Column(String(100), nullable=False)
+    balance = Column(Float, nullable=False, default=0.0)
+    created_at = Column(DateTime, nullable=False, default=func.now())
+    updated_at = Column(DateTime, nullable=True)
+    
+    user = relationship("User", back_populates="accounts")
+
 
 class Category(Base):
     
@@ -80,6 +96,7 @@ class Category(Base):
     
     id = Column(Integer, primary_key=True)
     category = Column(String(50), unique=True)
+    type = Column(String(20), nullable=False, default='')
     
     tasks = relationship("Tasks", back_populates="category")
     
